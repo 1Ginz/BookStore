@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <!-- reset css  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- css  -->
+    <link href="./header.component.css" rel="stylesheet" type="text/css">
+    <!-- gg font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- font icon -->
+    <script src="https://kit.fontawesome.com/46f0e7003f.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<header class="header">
+    <div class="grid wide">
+        <nav class="header__navbar hide-on-mobile-tablet">
+            <ul class="header__navbar-list">
+                <!-- <li class="header__navbar-item header__navbar-user">
+                    <span style="margin-right: 20px;" sec:authorize="hasRole('ROLE_ADMIN')" class="header__navbar-user-name">Thêm</span>
+                     <ul class="header__navbar-user-menu">
+                        <li class="header__navbar-user-item header__navbar-user-item--separate">
+                            <a th:href="@{/admin/category/add}">Thêm danh mục</a>
+                        </li>
+                        <li class="header__navbar-user-item header__navbar-user-item--separate">
+                            <a th:href="@{/admin/books/add}">Thêm Sách</a>
+                        </li>
+                    </ul>
+                </li> -->
+                <!-- <li class="header__navbar-item header__navbar-user">
+                    <span sec:authorize="hasRole('ROLE_ADMIN')" class="header__navbar-user-name">Xem</span>
+                    <ul class="header__navbar-user-menu">
+                        <li class="header__navbar-user-item header__navbar-user-item--separate">
+                            <a th:href="@{/admin/category/}">Danh Mục</a>
+                        </li>
+                        <li class="header__navbar-user-item header__navbar-user-item--separate">
+                            <a th:href="@{/admin/books/}">Sách</a>
+                        </li>
+                       <li class="header__navbar-user-item header__navbar-user-item&#45;&#45;separate">
+                           <a href="admin/books/add">User</a>
+                       </li>
+                        <li class="header__navbar-user-item header__navbar-user-item--separate">
+                            <a th:href="@{/admin/orders/}">Đơn Hàng</a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="header__navbar-user-item header__navbar-user-item--separate">
+                    <a href="/logout">Đăng xuất</a>
+                </li> -->
+                <li *ngIf="role === 'ROLE_ADMIN'" class="header__navbar-user-item header__navbar-user-item--separate">
+                    <a routerLink="/admin">Trang Admin</a>
+                </li> 
+                <ng-template #noUser>
+                    <a #noUserSignUp style="text-decoration: none" routerLink="/sign-up"><li class="header__navbar-item header__navbar-item-strong header__navbar-item--separate header__navbar-register">Đăng ký</li></a>
+                    <a #noUserSignIn style="text-decoration: none" routerLink="/sign-in"><li class="header__navbar-item header__navbar-item-strong header__navbar-login">Đăng nhập</li></a>
+                </ng-template>
+                <li *ngIf="username !== null; else noUser" class="header__navbar-item header__navbar-user">
+                    <img [src]="avatar" alt="" class="header__navbar-user-avatar" style="width: 22px;height: 22px;border-radius: 50%;border: 1px solid rgba(0, 0, 0, 0.1);">
+                    <span class="header__navbar-user-name">{{username}}</span>
+                    <ul class="header__navbar-user-menu">
+                        <li class="header__navbar-user-item">
+                            <a routerLink="/user">Tài khoản của tôi</a>
+                        </li>
+                        <li class="header__navbar-user-item">
+                            <a routerLink="/order">Giỏ Hàng</a>
+                        </li>
+                        <li class="header__navbar-user-item">
+                            <a routerLink="/user/order">Lịch Sử Mua Hàng</a>
+                        </li>
+                        <li class="header__navbar-user-item header__navbar-user-item--separate">
+                            <a routerLink="/logout">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="header-with-search">
+            <div class="notpc-menu-search">
+                <label for="check-bars" class="header__notpc-menu">
+                    <i class="fas fa-bars menu__heading-icon"></i>
+                </label>
+                <label for="mobile-search-checkbox" class="header__mobile-search">
+                    <i class="header__mobile-search-icon fas fa-search"></i>
+                </label>
+            </div>
+            <input type="checkbox" name="" hidden id="check-bars" class="header__nav-checkbox">
+            <input type="checkbox" name="" hidden id="mobile-search-checkbox" class="header__search-checkbox">
+            <label for="check-bars" class="notpc__menu-overlay"></label>
+            <nav class="notpc__menu-bar">
+                <ul class="notpc__menu-content">
+                    <label for="check-bars" class="nav__mobile-close">
+                        <i class="fa-solid fa-xmark" style="cursor: pointer;"></i>
+                    </label>
+                    <li class="notpc__menu-header">
+                        <a href="#" class="header__logo-link-notpc">
+                            <svg fill="#000000" height="100px" width="100px" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452.707 452.707" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 452.707 452.707">
+                                <g>
+                                    <path d="m234.873,126.705h-12.348c-5.523,0-10,4.477-10,10v43.498 43.498c0,5.523 4.477,10 10,10h21.749c17.506,0 31.749-14.242 31.749-31.749 0-11.08-5.709-20.847-14.336-26.529 3.12-4.913 4.936-10.731 4.936-16.969-0.001-17.506-14.244-31.749-31.75-31.749zm-2.348,20h2.348c6.479,0 11.749,5.271 11.749,11.749s-5.271,11.749-11.749,11.749h-2.348v-23.498zm11.749,66.996h-11.749v-23.498h2.348 9.401c6.478,0 11.749,5.271 11.749,11.749-0.001,6.479-5.271,11.749-11.749,11.749z"/>
+                                    <path d="m310.048,146.708c6.479,0 11.75,5.271 11.75,11.75 0,5.523 4.477,10 10,10s10-4.477 10-10c0-17.507-14.243-31.75-31.75-31.75s-31.75,14.243-31.75,31.75v43.49c0,17.507 14.243,31.75 31.75,31.75s31.75-14.243 31.75-31.75c0-5.523-4.477-10-10-10s-10,4.477-10,10c0,6.479-5.271,11.75-11.75,11.75s-11.75-5.271-11.75-11.75v-43.49c0-6.479 5.271-11.75 11.75-11.75z"/>
+                                    <path d="m150.541,233.383c0.84,0.217 1.682,0.321 2.511,0.321 4.449,0 8.509-2.991 9.675-7.499l3.258-12.598h19.118l3.258,12.599c1.383,5.347 6.839,8.559 12.186,7.177 5.347-1.383 8.561-6.838 7.178-12.185l-22.499-86.996c-1.142-4.413-5.123-7.496-9.682-7.496s-8.54,3.083-9.682,7.496l-22.499,86.996c-1.383,5.346 1.831,10.802 7.178,12.185zm29.389-39.777h-8.773l4.387-16.962 4.386,16.962z"/>
+                                    <path d="m331.798,242.2h-178.753c-5.523,0-10,4.477-10,10s4.477,10 10,10h178.753c5.523,0 10-4.477 10-10s-4.477-10-10-10z"/>
+                                    <path d="m153.045,116.707h178.753c5.523,0 10-4.477 10-10s-4.477-10-10-10h-178.753c-5.523,0-10,4.477-10,10s4.477,10 10,10z"/>
+                                    <path d="m379.771,0h-262.655c-29.875,0-54.18,24.305-54.18,54.18v344.346c0,29.875 24.305,54.181 54.18,54.181h262.654c5.523,0 10-4.477 10-10v-432.707c0.001-5.523-4.476-10-9.999-10zm-10,344.346h-242.655v-324.346h242.654v324.346zm-262.654-322.85v323.791c-9.048,1.696-17.311,5.639-24.18,11.24v-302.347c0-15.368 10.197-28.398 24.18-32.684zm10,411.211c-18.847,0-34.18-15.333-34.18-34.181 0-18.847 15.333-34.18 34.18-34.18h252.654v10.18h-230.654c-5.523,0-10,4.477-10,10s4.477,10 10,10h230.655v8h-60.655c-5.523,0-10,4.477-10,10s4.477,10 10,10h60.655v10.181h-252.655z"/>
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                    <!--Todo: sec:authorize="!isAuthenticated()" -->
+                    <li class="notpc__menu-item">
+                        <a href="/login" class="notpc__menu-link">Đăng nhập</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()" class="notpc__menu-item">
+                        <a href="/registration" class="notpc__menu-link">Đăng ký</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="notpc__menu-item">
+                        <a href="/" class="notpc__menu-link">hi user</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="notpc__menu-item">
+                        <a routerLink="/logout" class="notpc__menu-link">Đăng xuất</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header__logo">
+                <a sec:authorize="!hasRole('ROLE_ADMIN')" routerLink="/" class="header__logo-link">
+                    <svg fill="#000" style="margin-left: 50px;" height="70px" width="70px" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452.707 452.707" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 452.707 452.707">
+                        <g>
+                            <path d="m234.873,126.705h-12.348c-5.523,0-10,4.477-10,10v43.498 43.498c0,5.523 4.477,10 10,10h21.749c17.506,0 31.749-14.242 31.749-31.749 0-11.08-5.709-20.847-14.336-26.529 3.12-4.913 4.936-10.731 4.936-16.969-0.001-17.506-14.244-31.749-31.75-31.749zm-2.348,20h2.348c6.479,0 11.749,5.271 11.749,11.749s-5.271,11.749-11.749,11.749h-2.348v-23.498zm11.749,66.996h-11.749v-23.498h2.348 9.401c6.478,0 11.749,5.271 11.749,11.749-0.001,6.479-5.271,11.749-11.749,11.749z"/>
+                            <path d="m310.048,146.708c6.479,0 11.75,5.271 11.75,11.75 0,5.523 4.477,10 10,10s10-4.477 10-10c0-17.507-14.243-31.75-31.75-31.75s-31.75,14.243-31.75,31.75v43.49c0,17.507 14.243,31.75 31.75,31.75s31.75-14.243 31.75-31.75c0-5.523-4.477-10-10-10s-10,4.477-10,10c0,6.479-5.271,11.75-11.75,11.75s-11.75-5.271-11.75-11.75v-43.49c0-6.479 5.271-11.75 11.75-11.75z"/>
+                            <path d="m150.541,233.383c0.84,0.217 1.682,0.321 2.511,0.321 4.449,0 8.509-2.991 9.675-7.499l3.258-12.598h19.118l3.258,12.599c1.383,5.347 6.839,8.559 12.186,7.177 5.347-1.383 8.561-6.838 7.178-12.185l-22.499-86.996c-1.142-4.413-5.123-7.496-9.682-7.496s-8.54,3.083-9.682,7.496l-22.499,86.996c-1.383,5.346 1.831,10.802 7.178,12.185zm29.389-39.777h-8.773l4.387-16.962 4.386,16.962z"/>
+                            <path d="m331.798,242.2h-178.753c-5.523,0-10,4.477-10,10s4.477,10 10,10h178.753c5.523,0 10-4.477 10-10s-4.477-10-10-10z"/>
+                            <path d="m153.045,116.707h178.753c5.523,0 10-4.477 10-10s-4.477-10-10-10h-178.753c-5.523,0-10,4.477-10,10s4.477,10 10,10z"/>
+                            <path d="m379.771,0h-262.655c-29.875,0-54.18,24.305-54.18,54.18v344.346c0,29.875 24.305,54.181 54.18,54.181h262.654c5.523,0 10-4.477 10-10v-432.707c0.001-5.523-4.476-10-9.999-10zm-10,344.346h-242.655v-324.346h242.654v324.346zm-262.654-322.85v323.791c-9.048,1.696-17.311,5.639-24.18,11.24v-302.347c0-15.368 10.197-28.398 24.18-32.684zm10,411.211c-18.847,0-34.18-15.333-34.18-34.181 0-18.847 15.333-34.18 34.18-34.18h252.654v10.18h-230.654c-5.523,0-10,4.477-10,10s4.477,10 10,10h230.655v8h-60.655c-5.523,0-10,4.477-10,10s4.477,10 10,10h60.655v10.181h-252.655z"/>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+            <form class="header__search" (ngSubmit)="submitForm()" #searchForm="ngForm">
+                <div class="header__search-input-wrap">
+                    <input ngModel type="text" class="header__search-input" placeholder="Tìm kiếm sách" name="search">
+                </div>
+                <button class="header__search-btn" type="submit">
+                    <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

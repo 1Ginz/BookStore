@@ -1,0 +1,143 @@
+/* You can add global styles to this file, and also import other style files */
+:root{
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --primary-color: #ee4d2d;
+    --header-height: 120px;
+    --navbar-height: 34px;
+    --sort-bar-height: 46px;
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height))
+}
+*{
+    box-sizing: inherit;
+}
+html{
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+/* animation  */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes growth {
+    from{
+        transform: scale(var(--growth-from));
+    }
+    to{
+        transform: scale((var(--growth-to)));
+    }
+}
+
+/* btn */
+.btn{
+    min-width: 124px;
+    height: 34px;
+    border: none;
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    outline: none;
+    cursor: pointer;
+    color: var(--text-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.6rem;
+}
+.btn--nomal:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+.btn--nomal{
+    background: rgba(0,0,0,0.02);;
+}
+.btn.btn--primary{
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+.btn.btn--size-s{
+    height: 32px;
+    font-size: 12px;
+    padding: 0 8px;
+}
+/* selection */
+.select-input{
+    min-width: 200px;
+    padding: 0 12px;
+    height: 34px;
+    border-radius: 2px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.select-input__list{
+    z-index: 1;
+    position: absolute;
+    top: 26px;
+    right: 0;
+    left: 0;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    display: none;
+}
+.select-input__item{
+}
+.select-input__link{
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    display: block;
+    padding: 12px 0; 
+}
+.select-input__link:hover{
+    color: var(--primary-color);
+}
+.select-input:hover .select-input__list{
+    display: block;
+}
+/* pagination */
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.pagination-item{
+    margin: 0 12px;
+}
+.pagination-item__link{
+    --height: 30px;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #939393;
+    height: var(--height);
+    min-width: 40px;
+    display: block;
+    text-align: center;
+    line-height: var(--height);
+    border-radius: 2px;
+}
+.pagination-item__icon{
+
+}
+.pagination-item--active .pagination-item__link{
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: var(--white-color);
+}
+.pagination-item--active .pagination-item__link:hover{
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}

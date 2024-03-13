@@ -1,0 +1,12 @@
+<div class="category-wrap">
+    <h3 class="category__heading">
+      <i class="fas fa-list category__heading-icon"></i>
+      Thể loại
+    </h3>
+    <ul class="category-list" *ngFor="let category of categories">
+<!--              <&#45;&#45;category-item&#45;&#45;active &ndash;&gt;-->
+      <li class="category-item">
+        <a [routerLink]="'/category'" [queryParams]="{'id': category.id}"  class="category-item__link" >{{category.name}}</a>
+      </li>
+    </ul>
+  </div>

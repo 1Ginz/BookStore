@@ -1,0 +1,50 @@
+version: '3.6'
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: 29082001
+      MYSQL_DATABASE: bookstore
+    ports:
+      - 3307:3306
+    volumes:
+      - bookstoreDB:/var/lib/mysql
+    networks:
+      - app-network
+
+  backend:
+    build: ./bookstore
+    container_name: backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/bookstore
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 29082001
+    ports:
+      - 8080:2369
+    depends_on:
+      - database
+    volumes:
+      - ./bookstore/target/bookstore-0.0.1-SNAPSHOT.jar:/application.jar
+    networks:
+      - app-network
+      
+
+  frontend:
+    container_name: frontend
+    build: ./Bookshop-frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+
+volumes:
+  bookstoreDB:
+  
+networks:
+  app-network:
+    driver: bridge

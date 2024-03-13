@@ -1,0 +1,94 @@
+<app-header></app-header>
+<div class="app__container">
+    <div class="grid wide">
+      <div class="row sm-gutter app_content">
+        <nav class="category col l-2 m-0 c-0">
+          <app-category-home></app-category-home>
+        </nav>
+        <div class="col l-10 m-12 c-12">
+
+          <div class="home-filter hide-on-mobile-tablet">
+                            <span class="home-filter__label">
+                                Sắp xếp theo
+                            </span>
+<!--            <button class="btn home-filter__btn">Phổ biến</button>-->
+<!--            <button class="btn btn&#45;&#45;primary home-filter__btn">Mới nhất</button>-->
+<!--            <button class="btn home-filter__btn">Bán chạy</button>-->
+            <div class="select-input">
+              <span class="select-input__label">Giá</span>
+              <i class="select-input__icon fa-solid fa-chevron-down"></i>
+              <ul class="select-input__list">
+                <li class="select-input__item">
+                  <a [routerLink]="route" [queryParams]="{sort_by: 'price', type_sort: 'ASC'}" queryParamsHandling="merge" class="select-input__link">
+                    Giá: Thấp đến cao
+                  </a>
+                </li>
+                <li class="select-input__item">
+                  <a [routerLink]="route" [queryParams]="{sort_by: 'price', type_sort: 'DESC'}" queryParamsHandling="merge" class="select-input__link">
+                    Giá: Cao đến thấp
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <nav class="mobile-category">
+            <ul class="mobile-category__list">
+              <li class="mobile-category__item">
+                <a href="" class="mobile-category__link">Thần Thoại</a>
+              </li>
+              <li class="mobile-category__item">
+                <a href="" class="mobile-category__link">Truyền Thuyết</a>
+              </li>
+              <li class="mobile-category__item">
+                <a href="" class="mobile-category__link">Cổ Tích</a>
+              </li>
+              <li class="mobile-category__item">
+                <a href="" class="mobile-category__link">Sử Thi</a>
+              </li>
+              <li class="mobile-category__item">
+                <a href="" class="mobile-category__link">Truyện Ngụ Ngôn</a>
+              </li>
+              <li class="mobile-category__item">
+                <a href="" class="mobile-category__link">Truyện Cười</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="home-product">
+            <div class="row sm-gutter">
+              <div *ngFor="let book of books" class="col l-2-4 m-4 c-6">
+                <a class="home-product-item" [routerLink]="'/books/'+book.id">
+                <div class="home-product-item__img" [ngStyle]="{'background-image': 'url(http://localhost:2369' + book.imgCover + ')'}"></div>
+
+                  <br>
+                  <h4 class="home-product-item__name">{{book.title}}</h4>
+                  <div class="home-product-item__price">
+                    <span class="home-product-item__price-current" >${{book.price}}</span>
+                  </div>
+                  <div class="home-product-item__origin">
+                    <h4 class="home-product-item__origin-name" >{{book.author}}</h4>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination home-product__pagination">
+              <li *ngIf="currentPage != 1" class="pagination-item">
+                <a class="pagination-item__link" routerLink="/" [queryParams]="{'page': currentPage-1}" queryParamsHandling="merge">Previous</a>
+              </li>
+              <li *ngFor="let page of Pages" [ngStyle]="{'background-color: #ee4d2d': page - 1 === currentPage}" class="pagination-item">
+                <a  routerLink="/" [queryParams]="{'page': page}" queryParamsHandling="merge" class="pagination-item__link" href="#"><span>{{page}}</span></a>
+              </li>
+              <li *ngIf="currentPage !== Pages.length" class="pagination-item">
+                <a  routerLink="/" [queryParams]="{'page': currentPage+1}" queryParamsHandling="merge"  class="pagination-item__link" href="#">Next</a>
+                <!-- <a th:href="@{'/?sort_by=' + ${sort_by} + '&type_sort=' + ${type_sort}  + '&pageNumber=' +${pageNumber + 1}}" class="pagination-item__link" href="#">Next</a> -->
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

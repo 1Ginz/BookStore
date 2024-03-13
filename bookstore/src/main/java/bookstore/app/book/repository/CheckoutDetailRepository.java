@@ -1,0 +1,9 @@
+package bookstore.app.book.repository;
+
+import bookstore.app.book.entity.CheckoutDetail;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CheckoutDetailRepository extends JpaRepository<CheckoutDetail,Long> {
+}
